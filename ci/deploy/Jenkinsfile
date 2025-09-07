@@ -84,9 +84,11 @@ pipeline {
         stage('Copy Config') {
             steps {
                 script {
-                    sh '''
-                        mkdir -p config && mkdir -p helm/config && cp -r config/* helm/config/
-                    '''
+                    if (fileExists('config')) {
+                        sh '''
+                            mkdir -p ./helm/config && cp -r config/* ./helm/config/
+                        '''
+                    }
                 }
             }
         }
@@ -105,7 +107,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        helm install prometheus ./helm \
+                        helm upgrade --install prometheus ./helm \
                             -f config.yml \
                             --kubeconfig kubeconfig.yaml \
                             --dry-run --debug

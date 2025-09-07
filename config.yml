@@ -13,6 +13,10 @@ service:
 ports:
   - 9090
 
+env:
+
+runAsUser: 0
+
 volumes:
   - name: data
     hostPath: "/mnt/core_data/k3s/prometheus"
