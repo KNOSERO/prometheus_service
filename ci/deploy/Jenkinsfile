@@ -8,7 +8,7 @@ pipeline {
         ansiColor('xterm')
     }
     environment {
-        REPO_URL = 'https://github.com/KNOSERO/template_service_k3s.git'
+        REPO_URL = 'https://github.com/KNOSERO/prometheus_service.git'
         DEFAULT_BRANCH = 'master'
         CREDITS_ID = 'github-token'
     }
@@ -77,6 +77,16 @@ pipeline {
                             }
                         }
                     }
+                }
+            }
+        }
+
+        stage('Copy Config') {
+            steps {
+                script {
+                    sh '''
+                        mkdir -p config && mkdir -p helm/config && cp -r config/* helm/config/
+                    '''
                 }
             }
         }
