@@ -166,7 +166,7 @@ pipeline {
             }
         }
 
-        stage('Test Helm Example 1') {
+        stage('Test Lint') {
             steps {
                 script {
                     sh '''
@@ -180,7 +180,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        helm install hello-world ./helm \
+                        helm install prometheus ./helm \
                             -f config.yml \
                             --kubeconfig kubeconfig.yaml \
                             --dry-run --debug
