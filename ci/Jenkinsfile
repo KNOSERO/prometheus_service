@@ -180,7 +180,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        helm install prometheus ./helm \
+                        helm upgrade --install prometheus ./helm \
                             -f config.yml \
                             --kubeconfig kubeconfig.yaml \
                             --dry-run --debug
